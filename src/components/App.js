@@ -1,5 +1,9 @@
+import SignUp from "./SignUp";
+
 function App(){
-  return (<h1>OIII</h1>)
+  return (
+    <SignUp />
+  )
 }
 
 export default App;
