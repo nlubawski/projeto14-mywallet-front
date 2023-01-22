@@ -1,8 +1,15 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+
 import SignUp from "./SignUp";
 
 function App(){
   return (
-    <SignUp />
+    <BrowserRouter>
+        <Routes>
+            <Route path="/sign-up" element={<SignUp />} />
+        </Routes>
+    </BrowserRouter>
   )
 }
 
