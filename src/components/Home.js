@@ -1,36 +1,52 @@
-import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import UserContext from "./context/UserContext";
 
-function  Home(){
-  const [value, setValue] = useState("");
-  const [description, setDescription] = useState("");
-  const {token, name} = useContext(UserContext)
-  const navigate = useNavigate();
-  const config = {
-    headers: {
-      "Authorization": `Bearer ${token}`
-    }
+import { useState, useContext, useEffect } from "react";
+import axios from "axios";
+import UserContext from './context/UserContext'
+
+
+function Home(){
+  const { token, name } = useContext(UserContext);
+  const [extract,setExtract] = useState({})
+
+  function statement() {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const promisse = axios.get("http://localhost:4009/api/statement", config);
+    promisse.then(response => {
+      const { data } = response;
+      setExtract(data);
+    });
+
+    promisse.catch((err) => {
+      console.log(err.response);
+    });
   }
-  return(
-    <form>
-      <input
-        type="text"
-        placeholder="Valor"
-        required
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Descricao"
-        required
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <button type="submit">Salvar Entrada</button>
-    </form>
+
+  useEffect(() => {
+    statement();
+  }, []);
+  
+  
+  return (
+    <div>
+        {extract.length > 0 ? 
+          extract.map((item, index) => {
+            const {type, date, description, value} = item;
+            return (
+              <div key={index}>
+                <h1>data= {date}</h1>
+                <h1>descrição= {description}</h1>
+                <h1>valor= {value}</h1>
+              </div>
+            )
+          })
+  
+        : <>Nada ainda</>}
+      </div>
   )
 }
 
