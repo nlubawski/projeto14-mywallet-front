@@ -57,7 +57,7 @@ function SignUp() {
           />
           <Botao type="submit">Entrar </Botao>
           <Texto>
-            <Link to="/sing-up">Primeira vez? Cadastre-se!</Link>
+            <Link to="/sign-up">Primeira vez? Cadastre-se!</Link>
           </Texto>
         </Formulario>
       </Container>

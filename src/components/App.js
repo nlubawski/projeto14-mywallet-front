@@ -16,6 +16,7 @@ function App() {
     <UserContext.Provider  value={{token, setToken, name, setName, userId, setUserId}} >
     <BrowserRouter>
       <Routes>
+        <Route index element={<SignIn />}  />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/home" element={<Home />} />
