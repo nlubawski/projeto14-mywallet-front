@@ -36,7 +36,7 @@ function EditDeposit() {
   return (
     <Container>
       <Topo>
-        <Texto>Olá,</Texto>
+        <Texto>Editar Entrada</Texto>
       </Topo>
       <Formulario onSubmit={saveTransaction}>
         <Input
@@ -89,7 +89,7 @@ const Topo = styled.div`
 const Texto = styled.p`
   font-family: "Lexend Deca", sans-serif;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 18px;
   color: #fff;
 `;
 
