@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import UserContext from './context/UserContext'
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { RiLogoutBoxRLine } from "react-icons/ri"
 import { AiOutlinePlusCircle } from "react-icons/ai"
@@ -11,9 +11,17 @@ import { AiOutlineMinusCircle } from "react-icons/ai"
 
 
 function Home() {
-  const { token, name } = useContext(UserContext);
+  const { token, setToken, name, setName, setUserId } = useContext(UserContext);
   const [extract, setExtract] = useState({})
+  const navigate = useNavigate();
   let sum = 0;
+
+  function logout() {
+    setToken("")
+    setName("")
+    setUserId("")
+    navigate("/")
+  }
 
   function statement() {
     const config = {
@@ -32,26 +40,25 @@ function Home() {
       console.log(err.response);
     });
   }
-
   useEffect(() => {
     statement();
   }, []);
 
-
   return (
     <Container>
       <Topo>
-        <Texto>Olá, {name}</Texto><RiLogoutBoxRLine size={25} color={"white"} />
+        <Texto>Olá, {name}</Texto><RiLogoutBoxRLine size={25} color={"white"}
+          onClick={logout} />
       </Topo>
       <Principal>
-        
-          {extract.length > 0 ? 
+
+        {extract.length > 0 ?
           extract.map((item, index) => {
-            const {type, date, description, value} = item;
-            if(type === 'deposit'){
-              sum+=value
-            }else if(type === 'withdraw'){
-              sum-=value
+            const { type, date, description, value } = item;
+            if (type === 'deposit') {
+              sum += value
+            } else if (type === 'withdraw') {
+              sum -= value
             }
             return (
               <Extrato key={index}>
@@ -62,9 +69,9 @@ function Home() {
             )
           })
           : <>Nada ainda</>}
-          {extract.length > 0 ? 
-          <Saldo><div>Saldo</div> <div 
-          style={sum >= 0 ? { color: "green" } : { color: "red" }}>{sum} </div></Saldo>
+        {extract.length > 0 ?
+          <Saldo><div>Saldo</div> <div
+            style={sum >= 0 ? { color: "green" } : { color: "red" }}>{sum} </div></Saldo>
           :
           <></>}
 
