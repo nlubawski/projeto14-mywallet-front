@@ -53,8 +53,8 @@ function Home() {
         : <>Nada ainda</>}
       </Principal>
       <Inferior>
-        <Link to="/entrada"><Botao>Nova Entrada</Botao></Link>
-        <Link to="/saida"><Botao>Nova Saida</Botao></Link>
+        <Link to="/deposit"><Botao>Nova Entrada</Botao></Link>
+        <Link to="/withdraw"><Botao>Nova Saida</Botao></Link>
       </Inferior>
     </Container>
   )
