@@ -55,16 +55,16 @@ function Home() {
             }
             return (
               <Extrato key={index}>
-                <div>data</div>
+                <Date>{date}</Date>
                 <div>{description}</div>
-                <div>{value}</div>
+                <div style={value >= 0 ? { color: "green" } : { color: "red" }}>{value}</div>
               </Extrato>
             )
           })
-                    
           : <>Nada ainda</>}
           {extract.length > 0 ? 
-          <Saldo><div>Saldo</div> <div>{sum} </div></Saldo>
+          <Saldo><div>Saldo</div> <div 
+          style={sum >= 0 ? { color: "green" } : { color: "red" }}>{sum} </div></Saldo>
           :
           <></>}
 
@@ -109,12 +109,12 @@ const Texto = styled.p`
 const Principal = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   background-color: #fff;
   height: 446px;
   width: 326px;
-  /* margin-top: 78px; */
+  padding-top:20px;
+  padding-bottom:38px;
   margin-bottom: 13px;
   padding-left: 25px;
   padding-right: 25px;
@@ -152,8 +152,9 @@ const Botao = styled.button`
 const Extrato = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   width: 100%;
+  heigh:100%;
   margin-bottom: 12px;
   font-size:18px
 `
@@ -163,7 +164,12 @@ const Saldo = styled.div`
   width: 80%;
   position:absolute;
   bottom: 10px;
-  font-size:22px
+  font-size:22px;
+  font-weight:bold;
+`
+
+const Date = styled.div`
+  color:#C6C6C6;
 `
 
 export default Home
