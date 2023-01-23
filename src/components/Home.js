@@ -30,7 +30,7 @@ function Home() {
       },
     };
 
-    const promisse = axios.get(`${process.env.API_URL}/statement`, config);
+    const promisse = axios.get('/statement', config);
     promisse.then(response => {
       const { data } = response;
       setExtract(data);

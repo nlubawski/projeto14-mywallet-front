@@ -2,6 +2,7 @@ import axios from "axios"
 import { useState, useContext } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import styled from "styled-components"
+import env from "react-dotenv";
 
 import UserContext from "./context/UserContext"
 
@@ -11,17 +12,18 @@ function SignUp() {
   const [passwordValue, setPasswordValue] = useState("")
   const navigate = useNavigate();
 
+  console.log("url", env.API_URL )
   function signIn(event) {
     event.preventDefault();
 
-    const promise = axios.post(`${process.env.API_URL}/sign-in`, {
+    
+    const promise = axios.post('/sign-in', {
       email: emailValue,
       password: passwordValue,
     })
 
     promise.then(response => {
       const { token, name, userId } = response.data
-      console.log("data", token, name, userId)
       setToken(token);
       setName(name);
       setUserId(userId)

@@ -13,7 +13,7 @@ function SignUp() {
   function signUp(event){
     event.preventDefault();
 
-    const promise = axios.post(`${process.env.API_URL}/sign-up`, {
+    const promise = axios.post('/sign-up', {
       name,
       email,
       password,

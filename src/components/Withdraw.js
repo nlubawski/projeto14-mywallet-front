@@ -22,7 +22,7 @@ function Withdraw() {
       type: "withdraw",
       value: parseFloat(value)
     };
-    const promise = axios.post(`${process.env.API_URL}/statement`, body, config)
+    const promise = axios.post('/statement', body, config)
     promise.then(response => {
       const { data } = response;
       navigate("/home");
