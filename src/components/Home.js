@@ -47,8 +47,8 @@ function Home() {
   return (
     <Container>
       <Topo>
-        <Texto>Olá, {name}</Texto><RiLogoutBoxRLine size={25} color={"white"}
-          onClick={logout} />
+        <Texto data-test="user-name">Olá, {name}</Texto><RiLogoutBoxRLine size={25} color={"white"}
+          onClick={logout} data-test="logout" />
       </Topo>
       <Principal>
 
@@ -63,22 +63,25 @@ function Home() {
             return (
               <Extrato key={index}>
                 <Date>{date}</Date>
-                <div>{description}</div>
-                <div style={value >= 0 ? { color: "green" } : { color: "red" }}>{value}</div>
+                <div data-test="registry-name">{description}</div>
+                <div data-test="registry-amount" style={value >= 0 ? { color: "green" } : { color: "red" }}>{value}</div>
               </Extrato>
             )
           })
           : <>Nada ainda</>}
         {extract.length > 0 ?
           <Saldo><div>Saldo</div> <div
+            data-test="total-amount" 
             style={sum >= 0 ? { color: "green" } : { color: "red" }}>{sum} </div></Saldo>
           :
           <></>}
 
       </Principal>
       <Inferior>
-        <Link to="/deposit"><Botao><AiOutlinePlusCircle size={22} color={"white"} />Nova Entrada</Botao></Link>
-        <Link to="/withdraw"><Botao><AiOutlineMinusCircle size={22} color={"white"} />Nova Saida</Botao></Link>
+        <Link to="/deposit"><Botao data-test="new-income"><AiOutlinePlusCircle size={22} color={"white"} />Nova Entrada</Botao></Link>
+        <Link to="/withdraw"><Botao
+        data-test="new-expense"
+        ><AiOutlineMinusCircle size={22} color={"white"} />Nova Saida</Botao></Link>
       </Inferior>
     </Container>
   )

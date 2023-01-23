@@ -39,6 +39,7 @@ function Deposit() {
       </Topo>
       <Formulario onSubmit={saveTransaction}>
         <Input
+          data-test="registry-amount-input"
           type="text"
           placeholder="Valor"
           required
@@ -46,13 +47,17 @@ function Deposit() {
           onChange={(e) => setValue(e.target.value)}
         />
         <Input
+          data-test="registry-name-input"
           type="text"
           placeholder="Descricao"
           required
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <Botao type="submit">Salvar Entrada</Botao>
+        <Botao 
+          data-test="registry-save"
+          type="submit">Salvar Entrada
+        </Botao>
       </Formulario>
     </Container>
   )

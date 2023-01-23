@@ -40,6 +40,7 @@ function SignUp() {
       </Title>
         <Formulario onSubmit={signUp}>
           <Input
+            data-test="name"
             type="text"
             placeholder="Nome"
             required
@@ -47,6 +48,7 @@ function SignUp() {
             onChange={e => setName(e.target.value)}
           />
           <Input
+            data-test="email"
             type="email"
             placeholder="E-mail"
             required
@@ -54,6 +56,7 @@ function SignUp() {
             onChange={e => setEmail(e.target.value)}
           />
           <Input
+            data-test="password"
             type="password"
             placeholder="Senha"
             required
@@ -61,13 +64,14 @@ function SignUp() {
             onChange={e => setPassword(e.target.value)}
           />
           <Input
+            data-test="conf-password"
             type="password"
             placeholder="Confirme a senha"
             required
             value={confirmPassword}          
             onChange={e => setConfirmPassword(e.target.value)}
           />
-          <Botao type="submit">Entrar </Botao>
+          <Botao data-test="sign-up-submit" type="submit">Entrar </Botao>
           <Texto>
             <Link to="/sign-in">Já tem uma conta? Entre agora!</Link>
           </Texto>

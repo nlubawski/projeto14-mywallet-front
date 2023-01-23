@@ -42,6 +42,7 @@ function SignUp() {
         </Title>
         <Formulario onSubmit={signIn}>
           <Input
+            data-test="email"
             type="email"
             placeholder="E-mail"
             required
@@ -49,13 +50,14 @@ function SignUp() {
             onChange={e => setEmailValue(e.target.value)}
           />
           <Input
+            data-test="password"
             type="password"
             placeholder="Senha"
             required
             value={passwordValue}
             onChange={e => setPasswordValue(e.target.value)}
           />
-          <Botao type="submit">Entrar </Botao>
+          <Botao data-test="sign-in-submit" type="submit">Entrar </Botao>
           <Texto>
             <Link to="/sign-up">Primeira vez? Cadastre-se!</Link>
           </Texto>
