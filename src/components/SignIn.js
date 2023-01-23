@@ -1,24 +1,30 @@
 import axios from "axios"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import {useNavigate} from "react-router-dom"
 
+import UserContext from "./context/UserContext"
+
 function SignUp() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const {setToken, setName, setUserId} = useContext(UserContext)
+  const [emailValue, setEmailValue] = useState("")
+  const [passwordValue, setPasswordValue] = useState("")
   const navigate = useNavigate();
 
   function signIn(event){
     event.preventDefault();
 
     const promise = axios.post("http://localhost:4009/api/sign-in", {
-      email,
-      password,
+      email: emailValue,
+      password: passwordValue,
     })
 
     promise.then(response =>{
-      const {data} = {response}
-      console.log("data", data)
-      navigate("/")
+      const {token, name, userId} = response.data
+      console.log("data",token, name, userId)
+      setToken(token);
+      setName(name);
+      setUserId(userId)
+      //navigate('/');
     })
     promise.catch(err => {
       console.log("deu ruim login")
@@ -34,15 +40,15 @@ function SignUp() {
           type="email"
           placeholder="E-mail"
           required
-          value={email}
-          onChange={e => setEmail(e.target.value)}
+          value={emailValue}
+          onChange={e => setEmailValue(e.target.value)}
         />
         <input
           type="password"
           placeholder="Senha"
           required
-          value={password}
-          onChange={e => setPassword(e.target.value)}
+          value={passwordValue}
+          onChange={e => setPasswordValue(e.target.value)}
         />
         <button type="submit">Entrar </button>
       </form>
