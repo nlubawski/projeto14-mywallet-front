@@ -67,7 +67,6 @@ function Home() {
 
         {extract.length > 0 ?
           extract.map((item, index) => {
-            console.log("item", item)
             const { type, date, description, value, _id } = item;
             if (type === 'deposit') {
               sum += value
@@ -77,7 +76,7 @@ function Home() {
             return (
               <Extrato key={index}>
                 <Date>{date}</Date>
-                <div data-test="registry-name">{description}</div>
+                <Link  to={type === 'deposit' ? `/edit-deposit/${_id}` : `/edit-withdraw/${_id}`}><div data-test="registry-name">{description}</div></Link>
                 <Value><div data-test="registry-amount" style={type === 'withdraw' ? { color: "red" } : { color: "green" }}>{value}</div><Delete onClick={() => deleteTransaction(_id)}>x</Delete></Value>
               </Extrato>
             )

@@ -1,10 +1,11 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import UserContext from "./context/UserContext";
 import styled from "styled-components";
 
-function Withdraw() {
+
+function EditDeposit() {
   const [value, setValue] = useState("");
   const [description, setDescription] = useState("");
   const { token, name } = useContext(UserContext)
@@ -14,28 +15,28 @@ function Withdraw() {
       "Authorization": `Bearer ${token}`
     }
   }
+  const {id} =  useParams()
 
   function saveTransaction(event) {
     event.preventDefault();
     const body = {
       description,
-      type: "withdraw",
+      type: "deposit",
       value: parseFloat(value)
     };
-    const promise = axios.post('/statement', body, config)
+    const promise = axios.put(`/statement/${id}`, body, config)
     promise.then(response => {
-      const { data } = response;
       navigate("/home");
     });
     promise.catch(error => {
-      alert("tente novamente");
+      console.error(error)
     })
   }
 
   return (
     <Container>
       <Topo>
-        <Texto>Olá, {name}</Texto>
+        <Texto>Olá,</Texto>
       </Topo>
       <Formulario onSubmit={saveTransaction}>
         <Input
@@ -55,8 +56,9 @@ function Withdraw() {
           onChange={(e) => setDescription(e.target.value)}
         />
         <Botao 
-        data-test="registry-save"
-        type="submit">Salvar Saida</Botao>
+          data-test="registry-save"
+          type="submit">Atualizar Entrada
+        </Botao>
       </Formulario>
     </Container>
   )
@@ -131,4 +133,4 @@ const Botao = styled.button`
 `;
 
 
-export default Withdraw
+export default EditDeposit
