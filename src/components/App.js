@@ -4,6 +4,7 @@ import UserContext from './context/UserContext';
 
 import SignUp from "./SignUp";
 import SignIn from "./SignIn"
+import Home from './Home';
 
 function App() {
   const [token, setToken] = useState({})
@@ -14,7 +15,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/sign-in" element={<SignIn />} />F
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/home" element={<Home />} />F
       </Routes>
     </BrowserRouter>
     </UserContext.Provider>
