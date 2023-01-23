@@ -5,6 +5,8 @@ import UserContext from './context/UserContext';
 import SignUp from "./SignUp";
 import SignIn from "./SignIn"
 import Home from './Home';
+import Withdraw from './Withdraw.js';
+import Deposit from './Deposit';
 
 function App() {
   const [token, setToken] = useState({})
@@ -16,7 +18,9 @@ function App() {
       <Routes>
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/home" element={<Home />} />F
+        <Route path="/home" element={<Home />} />
+        <Route path="/deposit" element={<Deposit/>} />
+        <Route path="/withdraw" element={<Withdraw />} />
       </Routes>
     </BrowserRouter>
     </UserContext.Provider>
