@@ -12,7 +12,6 @@ function SignUp() {
   const [passwordValue, setPasswordValue] = useState("")
   const navigate = useNavigate();
 
-  console.log("url", env.API_URL )
   function signIn(event) {
     event.preventDefault();
 
@@ -30,7 +29,6 @@ function SignUp() {
       navigate('/home');
     })
     promise.catch(err => {
-      console.log("deu ruim login")
       console.error(err.response)
     })
 

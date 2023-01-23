@@ -22,11 +22,9 @@ function SignUp() {
 
     promise.then(response =>{
       const {data} = {response}
-      console.log("data", data)
       navigate("/")
     })
     promise.catch(err => {
-      console.log("deu ruim")
       console.error(err.response)
     })
 

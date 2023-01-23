@@ -15,6 +15,11 @@ function Home() {
   const [extract, setExtract] = useState({})
   const navigate = useNavigate();
   let sum = 0;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
   function logout() {
     setToken("")
@@ -24,25 +29,33 @@ function Home() {
   }
 
   function statement() {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
     const promisse = axios.get('/statement', config);
     promisse.then(response => {
       const { data } = response;
       setExtract(data);
     });
-
     promisse.catch((err) => {
-      console.log(err.response);
+      console.error(err.response);
     });
   }
+
+  function deleteTransaction(id) {
+    if (window.confirm("Você quer mesmo deletar?")) {
+      const promisse = axios.delete(`/statement/${id}`, config);
+      promisse.then(response => {
+        statement();
+      });
+      promisse.catch((err) => {
+        console.error(err.response);
+      });
+    }
+  }
+
   useEffect(() => {
     statement();
   }, []);
+
+
 
   return (
     <Container>
@@ -54,7 +67,8 @@ function Home() {
 
         {extract.length > 0 ?
           extract.map((item, index) => {
-            const { type, date, description, value } = item;
+            console.log("item", item)
+            const { type, date, description, value, _id } = item;
             if (type === 'deposit') {
               sum += value
             } else if (type === 'withdraw') {
@@ -64,14 +78,14 @@ function Home() {
               <Extrato key={index}>
                 <Date>{date}</Date>
                 <div data-test="registry-name">{description}</div>
-                <div data-test="registry-amount" style={type === 'withdraw'? { color: "red" } : { color: "green" }}>{value}</div>
+                <Value><div data-test="registry-amount" style={type === 'withdraw' ? { color: "red" } : { color: "green" }}>{value}</div><Delete onClick={() => deleteTransaction(_id)}>x</Delete></Value>
               </Extrato>
             )
           })
           : <>Nada ainda</>}
         {extract.length > 0 ?
           <Saldo><div>Saldo</div> <div
-            data-test="total-amount" 
+            data-test="total-amount"
             style={sum >= 0 ? { color: "green" } : { color: "red" }}>{sum} </div></Saldo>
           :
           <></>}
@@ -80,7 +94,7 @@ function Home() {
       <Inferior>
         <Link to="/deposit"><Botao data-test="new-income"><AiOutlinePlusCircle size={22} color={"white"} />Nova Entrada</Botao></Link>
         <Link to="/withdraw"><Botao
-        data-test="new-expense"
+          data-test="new-expense"
         ><AiOutlineMinusCircle size={22} color={"white"} />Nova Saida</Botao></Link>
       </Inferior>
     </Container>
@@ -180,6 +194,15 @@ const Saldo = styled.div`
 
 const Date = styled.div`
   color:#C6C6C6;
+`
+
+const Value = styled.div`
+  display: flex
+`
+
+const Delete = styled.div`
+  padding-left: 10px;
+  color: #c6c6c6;
 `
 
 export default Home
