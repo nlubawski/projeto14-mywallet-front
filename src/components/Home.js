@@ -30,7 +30,7 @@ function Home() {
       },
     };
 
-    const promisse = axios.get("http://localhost:4009/api/statement", config);
+    const promisse = axios.get(`${process.env.API_URL}/statement`, config);
     promisse.then(response => {
       const { data } = response;
       setExtract(data);
@@ -64,7 +64,7 @@ function Home() {
               <Extrato key={index}>
                 <Date>{date}</Date>
                 <div data-test="registry-name">{description}</div>
-                <div data-test="registry-amount" style={value >= 0 ? { color: "green" } : { color: "red" }}>{value}</div>
+                <div data-test="registry-amount" style={type === 'withdraw'? { color: "red" } : { color: "green" }}>{value}</div>
               </Extrato>
             )
           })

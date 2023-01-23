@@ -14,7 +14,7 @@ function SignUp() {
   function signIn(event) {
     event.preventDefault();
 
-    const promise = axios.post("http://localhost:4009/api/sign-in", {
+    const promise = axios.post(`${process.env.API_URL}/sign-in`, {
       email: emailValue,
       password: passwordValue,
     })
