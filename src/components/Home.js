@@ -5,6 +5,10 @@ import UserContext from './context/UserContext'
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+import { RiLogoutBoxRLine } from "react-icons/ri"
+import { AiOutlinePlusCircle } from "react-icons/ai"
+import { AiOutlineMinusCircle } from "react-icons/ai"
+
 
 function Home() {
   const { token, name } = useContext(UserContext);
@@ -36,12 +40,12 @@ function Home() {
   return (
     <Container>
       <Topo>
-        <Texto>Olá,</Texto>
+        <Texto>Olá, {name}</Texto><RiLogoutBoxRLine size={25} color={"white"} />
       </Topo>
       <Principal>
-        {extract.length > 0 ? 
+        {extract.length > 0 ?
           extract.map((item, index) => {
-            const {type, date, description, value} = item;
+            const { type, date, description, value } = item;
             return (
               <div key={index}>
                 <h1>data= {date}</h1>
@@ -50,11 +54,11 @@ function Home() {
               </div>
             )
           })
-        : <>Nada ainda</>}
+          : <>Nada ainda</>}
       </Principal>
       <Inferior>
-        <Link to="/deposit"><Botao>Nova Entrada</Botao></Link>
-        <Link to="/withdraw"><Botao>Nova Saida</Botao></Link>
+        <Link to="/deposit"><Botao><AiOutlinePlusCircle size={22} color={"white"} />Nova Entrada</Botao></Link>
+        <Link to="/withdraw"><Botao><AiOutlineMinusCircle size={22} color={"white"} />Nova Saida</Botao></Link>
       </Inferior>
     </Container>
   )

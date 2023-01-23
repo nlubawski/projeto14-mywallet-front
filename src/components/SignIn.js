@@ -25,7 +25,7 @@ function SignUp() {
       setToken(token);
       setName(name);
       setUserId(userId)
-      //navigate('/');
+      navigate('/home');
     })
     promise.catch(err => {
       console.log("deu ruim login")
