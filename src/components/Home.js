@@ -13,6 +13,7 @@ import { AiOutlineMinusCircle } from "react-icons/ai"
 function Home() {
   const { token, name } = useContext(UserContext);
   const [extract, setExtract] = useState({})
+  let sum = 0;
 
   function statement() {
     const config = {
@@ -43,18 +44,30 @@ function Home() {
         <Texto>Olá, {name}</Texto><RiLogoutBoxRLine size={25} color={"white"} />
       </Topo>
       <Principal>
-        {extract.length > 0 ?
+        
+          {extract.length > 0 ? 
           extract.map((item, index) => {
-            const { type, date, description, value } = item;
+            const {type, date, description, value} = item;
+            if(type === 'deposit'){
+              sum+=value
+            }else if(type === 'withdraw'){
+              sum-=value
+            }
             return (
-              <div key={index}>
-                <h1>data= {date}</h1>
-                <h1>descrição= {description}</h1>
-                <h1>valor= {value}</h1>
-              </div>
+              <Extrato key={index}>
+                <div>data</div>
+                <div>{description}</div>
+                <div>{value}</div>
+              </Extrato>
             )
           })
+                    
           : <>Nada ainda</>}
+          {extract.length > 0 ? 
+          <Saldo><div>Saldo</div> <div>{sum} </div></Saldo>
+          :
+          <></>}
+
       </Principal>
       <Inferior>
         <Link to="/deposit"><Botao><AiOutlinePlusCircle size={22} color={"white"} />Nova Entrada</Botao></Link>
@@ -105,7 +118,8 @@ const Principal = styled.div`
   margin-bottom: 13px;
   padding-left: 25px;
   padding-right: 25px;
-  border-radius: 5px;;
+  border-radius: 5px;
+  position:relative;
 `;
 
 const Inferior = styled.div`
@@ -139,9 +153,17 @@ const Extrato = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  flex-direction: column;
-  width: 80%;
+  width: 100%;
   margin-bottom: 12px;
+  font-size:18px
+`
+const Saldo = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  position:absolute;
+  bottom: 10px;
+  font-size:22px
 `
 
 export default Home

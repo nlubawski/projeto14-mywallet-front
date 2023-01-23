@@ -20,7 +20,7 @@ function Withdraw() {
     const body = {
       description,
       type: "withdraw",
-      value: - parseFloat(value)
+      value: parseFloat(value)
     };
     const promise = axios.post("http://localhost:4009/api/statement", body, config)
     promise.then(response => {
