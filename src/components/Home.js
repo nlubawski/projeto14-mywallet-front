@@ -77,7 +77,9 @@ function Home() {
               <Extrato key={index}>
                 <Date>{date}</Date>
                 <Link  to={type === 'deposit' ? `/edit-deposit/${_id}` : `/edit-withdraw/${_id}`}><div data-test="registry-name">{description}</div></Link>
-                <Value><div data-test="registry-amount" style={type === 'withdraw' ? { color: "red" } : { color: "green" }}>{value}</div><Delete onClick={() => deleteTransaction(_id)}>x</Delete></Value>
+                <Value><div data-test="registry-amount" style={type === 'withdraw' ? { color: "red" } : { color: "green" }}>{value}</div><Delete 
+                data-test="registry-delete"
+                onClick={() => deleteTransaction(_id)}>x</Delete></Value>
               </Extrato>
             )
           })
